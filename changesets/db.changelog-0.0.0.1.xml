@@ -1,0 +1,82 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="igonzalez (generated)" id="1536359063772-1">
+       
+    <changeSet author="igonzalez (generated)" id="1536359063772-2">
+        <createTable tableName="c_category">
+            <column autoIncrement="true" name="id_category" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_c_category"/>
+            </column>
+            <column name="ds_category" type="VARCHAR(250)"/>
+            <column name="ds_last_user_modifier" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dt_last_modification" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ds_creation_user" type="VARCHAR(50)"/>
+            <column name="dt_creation_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fg_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+<changeSet author="igonzalez (generated)" id="1536359063772-15">
+        <createTable tableName="c_subcategory">
+            <column autoIncrement="true" name="id_subcategory" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_c_subcategory"/>
+            </column>
+            <column  name="id_category" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ds_subcategory" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ds_last_user_modifier" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dt_last_modification" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ds_creation_user" type="VARCHAR(50)"/>
+            <column name="dt_creation_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fg_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="igonzalez (generated)" id="1536359063772-42">
+        <createIndex indexName="ixfk_c_subcategory_c_category" tableName="c_subcategory">
+            <column name="id_category"/>
+        </createIndex>
+    </changeSet>
+    
+    <changeSet author="igonzalez (generated)" id="1536359063772-71">
+        <addForeignKeyConstraint baseColumnNames="id_category" baseTableName="c_subcategory" constraintName="fk_c_subcategory_c_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_category" referencedTableName="c_category"/>
+    </changeSet>
+    
+     
+     
+    <changeSet author="igonzalez (generated)" id="1536359063772-135">
+        <addUniqueConstraint catalogName="c_subcategory"
+                columnNames="ds_subcategory, id_category"
+                constraintName="c_subcategory_unique"
+                schemaName="public"
+                tableName="c_subcategory"
+                />
+    </changeSet>
+    <changeSet author="igonzalez (generated)" id="1536359063772-136">
+        <addUniqueConstraint catalogName="c_category"
+                columnNames="ds_category"
+                constraintName="c_category_unique"
+                schemaName="public"
+                tableName="c_category"
+                />
+    </changeSet>
+    </databaseChangeLog>
+
